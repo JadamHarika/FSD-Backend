@@ -1,0 +1,18 @@
+<web-app>
+<servlet>
+         <servlet-name>First</servlet-name>
+         <servlet-class>Hello</servlet-class>
+</servlet>
+<servlet-mapping>
+         <servlet-name>First</servlet-name>
+         <url-pattern>/csm</url-pattern>
+</servlet-mapping>
+<servlet>
+         <servlet-name>Date</servlet-name>
+         <servlet-class>Current</servlet-class>
+</servlet>
+<servlet-mapping>
+         <servlet-name>Date</servlet-name>
+         <url-pattern>/date</url-pattern>
+</servlet-mapping>
+</web-app>
