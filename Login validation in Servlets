@@ -1,0 +1,71 @@
+login.java:-
+import javax.servlet.*;
+import javax.servlet.http.*;
+import java.io.*;
+public class Login extends HttpServlet
+{
+public void doPost(HttpServletRequest req,HttpServletResponse res)throws ServletException,IOException
+{
+  String uname=req.getParameter("t1");
+  String pass=req.getParameter("t2");
+  if(uname.equals("harika")&&pass.equals("csm"))
+   {
+     RequestDispatcher rd=req.getRequestDispatcher("welcome");
+     rd.forward(req,res);
+   }
+  else
+   {
+      res.setContentType("text/html");
+      PrintWriter out=res.getWriter();
+      out.println("<h2>Sorry Invalid Details</h2>");
+      RequestDispatcher rd=req.getRequestDispatcher("login.html");
+      rd.include(req,res);
+   }
+}
+}
+
+welcome.java:- 
+
+import javax.servlet.*;
+import java.io.*;
+import javax.servlet.http.*;
+public class Welcome extends HttpServlet
+{
+public void doPost(HttpServletRequest req,HttpServletResponse res)throws ServletException,IOException
+{
+
+   PrintWriter out=res.getWriter();
+   String na=req.getParameter("t1");
+   out.println("welcome to "+na);
+}
+}
+
+login.html:-
+
+<html>
+<form method="post" action="login">
+Username:<input type="text" name="t1"><br>
+Password:<input type="password" name="t2"><br>
+<input type="submit" value="Login">
+</form>
+</html>
+
+web.xml:-
+<web-app>
+<servlet>
+         <servlet-name>First</servlet-name>
+         <servlet-class>Login</servlet-class>
+</servlet>
+<servlet-mapping>
+         <servlet-name>First</servlet-name>
+         <url-pattern>/login</url-pattern>
+</servlet-mapping>
+<servlet>
+         <servlet-name>Retrive</servlet-name>
+         <servlet-class>Welcome</servlet-class>
+</servlet>
+<servlet-mapping>
+         <servlet-name>Retrive</servlet-name>
+         <url-pattern>/welcome</url-pattern>
+</servlet-mapping>
+</web-app>
