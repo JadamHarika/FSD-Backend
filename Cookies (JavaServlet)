@@ -1,0 +1,54 @@
+cook1.java:-
+
+import javax.servlet.*;
+import java.io.*;
+import javax.servlet.http.*;
+public class Cook1 extends HttpServlet
+{
+    public void doPost(HttpServletRequest req,HttpServletResponse res) throws IOException,ServletException
+    {
+        String na = req.getParameter("t1");
+        Cookie c1 = new Cookie("Name",na);
+        res.addCookie(c1);
+        res.sendRedirect("c2.html");
+     }
+}
+
+cook2.java:-
+
+import javax.servlet.*;
+import java.io.*;
+import javax.servlet.http.*;
+public class Cook2 extends HttpServlet
+{
+    public void doPost(HttpServletRequest req,HttpServletResponse res) throws IOException,ServletException
+    {
+        String branch = req.getParameter("t2");
+        PrintWriter out = res.getWriter();
+        out.println("Branch is "+branch);
+        Cookie c[] = req.getCookies();
+        out.println(c[0].getName()+" is "+c[0].getValue());
+     }
+}
+
+web.xml:-
+
+<web-app>
+    <servlet>
+        <servlet-name>Sixth Servlet</servlet-name>
+        <servlet-class>Cook1</servlet-class>
+   </servlet>
+   <servlet-mapping>
+      <servlet-name>Sixth Servlet</servlet-name>
+      <url-pattern>/cook1</url-pattern>
+   </servlet-mapping>
+
+   <servlet>
+        <servlet-name>Seventh Servlet</servlet-name>
+        <servlet-class>Cook2</servlet-class>
+   </servlet>
+   <servlet-mapping>
+      <servlet-name>Seventh Servlet</servlet-name>
+      <url-pattern>/cook2</url-pattern>
+   </servlet-mapping>
+</web-app>
